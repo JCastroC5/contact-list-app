@@ -1,0 +1,60 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="modify-user">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <h1>Modificar contacto</h1>
+      <paper-input label="Foto (URL o Base64)" id="imageInput" value="{{contact.image}}"></paper-input>
+      <paper-input label="Nombre" id="nameInput" value="{{contact.name}}"></paper-input>
+      <paper-input label="Username" id="usernameInput" value="{{contact.username}}"></paper-input>
+      <paper-input label="Edad" id="ageInput" value="{{contact.age}}"></paper-input>
+      <paper-input label="Correo electrónico" id="emailInput" value="{{contact.email}}"></paper-input>
+      <paper-input label="Teléfono" id="phoneInput" value="{{contact.phone}}"></paper-input>
+      <paper-button on-click="_modifyUser">Guardar</paper-button>
+    </div>
+  </template>
+
+  <script>
+    class modifyUser extends Polymer.Element {
+      static get is() { return 'modify-user'; }
+
+      static get properties () {
+        return {
+          contact: {
+            type: Object,
+            value: {}
+          }
+        }
+      }
+
+      _modifyUser() {
+        this.dispatchEvent(new CustomEvent('modify-user', {
+          detail: this.contact
+        }));
+      }
+    }
+
+    window.customElements.define(modifyUser.is, modifyUser);
+  </script>
+</dom-module>
